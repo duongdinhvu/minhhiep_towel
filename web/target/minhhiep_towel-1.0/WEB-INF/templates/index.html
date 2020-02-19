@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Spring MVC + Thymeleaf</title>
+</head>
+<body>
+<h1>Spring MVC + Thymeleaf: hiển thị</h1>
+<h2>Display List:</h2>
+<ul th:if="${listTowel != null && !listTowel.empty}">
+    <li th:each="towel: ${listTowel}" th:text="${towel.id} + ' - ' +  ${towel.towelName}  + ' - ' + ${towel.description} "></li>
+</ul>
+
+
+</ul>
+</body>
