@@ -14,7 +14,7 @@
     <context:property-placeholder location="/WEB-INF/jdbc.properties"/>
     <context:annotation-config/>
     <mvc:annotation-driven />
-    <mvc:resources mapping="/resources/**" location="/resources/assets/"
+    <mvc:resources mapping="/resources/**" location="/resources/"
                    cache-period="31556926" />
     <mybatis:scan base-package="mhtowel.dao"/>
 
