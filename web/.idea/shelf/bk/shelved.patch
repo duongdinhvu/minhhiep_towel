@@ -1,0 +1,1413 @@
+Index: Procfile
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Procfile	(date 1582794993360)
++++ Procfile	(date 1582794993360)
+@@ -0,0 +1,1 @@
++web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
+\ No newline at end of file
+Index: target/minhhiep_towel-1.0/WEB-INF/templates/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html xmlns:th=\"http://www.thymeleaf.org\">\n\n<head>\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n    <title>Spring MVC + Thymeleaf</title>\n</head>\n<body>\n<h1>Spring MVC + Thymeleaf: hiển thị</h1>\n<h2>Display List:</h2>\n<ul th:if=\"${listTowel != null && !listTowel.empty}\">\n    <li th:each=\"towel: ${listTowel}\" th:text=\"${towel.id} + ' - ' +  ${towel.towelName}  + ' - ' + ${towel.description} \"></li>\n</ul>\n\n\n</ul>\n</body>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- target/minhhiep_towel-1.0/WEB-INF/templates/index.html	(revision fca40c3d84f8db0bc29e324a4cd2ba079cfd17f4)
++++ target/minhhiep_towel-1.0/WEB-INF/templates/index.html	(date 1582792685258)
+@@ -1,17 +1,698 @@
+ <!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+-
++<!--[if IE 7]> <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
++<!--[if IE 8]> <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
++<!--[if gt IE 8]><!-->
+ <head>
+-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+-    <title>Spring MVC + Thymeleaf</title>
++    <!-- TITLE OF SITE -->
++    <title> Minh Hiep Towel </title>
++
++    <!-- Meta -->
++    <meta charset="utf-8">
++    <meta name="description" content="app landing page template" />
++    <meta name="keywords" content="app, landing page, gradient background, image background, video background, template, responsive, bootstrap" />
++    <meta name="developer" content="">
++    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
++
++    <!-- FAV AND ICONS   -->
++    <link rel="shortcut icon" th:href="@{/resources/assets/images/favicon.ico}">
++    <link rel="shortcut icon" th:href="@{/resources/assets/images/apple-icon.png}">
++    <link rel="shortcut icon" sizes="72x72" th:href="@{/resources/assets/images/apple-icon-72x72.png}">
++    <link rel="shortcut icon" sizes="114x114" th:href="@{/resources/assets/images/apple-icon-114x114.png}">
++
++    <!-- GOOGLE FONTS -->
++    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7cPlayfair+Display:400,400i,700,900" rel="stylesheet">
++
++    <!-- FONT ICONS -->
++    <link rel="stylesheet" type="text/css"  th:href="@{/resources/assets/icons/font-awesome-4.7.0/css/font-awesome.css}" />
++
++    <!-- Custom Icon Font -->
++    <link rel="stylesheet" th:href="@{/resources/assets/fonts/flaticon.css}">
++    <!-- Bootstrap-->
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/bootstrap.min.css}">
++    <!-- Fancybox-->
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/jquery.fancybox.min.css}">
++    <!-- Animation -->
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/animate.css}">
++    <!-- owl -->
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/owl.css}">
++    <!--flexslider-->
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/flexslider.min.css}">
++    <!-- selectize -->
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/selectize.css}">
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/selectize.bootstrap3.css}">
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/jquery-ui.min.css}">
++    <!--dropdown -->
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/bootstrap-dropdownhover.min.css}">
++    <!-- mobile nav-->
++    <link rel="stylesheet" th:href="@{/resources/assets/plugins/css/meanmenu.css}">
++
++    <!-- COUSTOM CSS link  -->
++    <link rel="stylesheet" th:href="@{/resources/assets/css/style.css}">
++    <link rel="stylesheet" th:href="@{/resources/assets/css/responsive.css}">
++
++
++    <!--[if lt IE 9]><script src="js/plagin-js/html5shiv.js"></script>-->
++    <!--<script src="js/plagin-js/respond.min.js"></script>-->
++    <!--[endif]-->
++
+ </head>
+ <body>
+-<h1>Spring MVC + Thymeleaf: hiển thị</h1>
+-<h2>Display List:</h2>
+-<ul th:if="${listTowel != null && !listTowel.empty}">
+-    <li th:each="towel: ${listTowel}" th:text="${towel.id} + ' - ' +  ${towel.towelName}  + ' - ' + ${towel.description} "></li>
+-</ul>
+-
+-
+-</ul>
++<!--
++|========================
++|  HEADER
++|========================
++-->
++<header id="xt-home" class="xt-header">
++    <div class="header-top">
++        <div class="container">
++
++            <div class="user-nav pull-right col-md-6 col-sm-6 col-xs-12">
++                <ul>
++                    <li><a href="">Hot line: </a></li>
++                    <li><a href="">0912345678</a></li>
++                </ul>
++            </div>
++        </div>
++    </div>
++
++    <div class="main-navigation">
++        <nav class="navbar navbar-fixed-top nav-scroll">
++            <div class="container">
++                <div class="row">
++                    <div class="navbar-header">
++                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
++                            <span aria-hidden="true" class="icon"></span>
++                        </button>
++                        <a class="navbar-brand" href="index.html"><img th:src="@{/resources/assets/images/flogo.png}" alt="" class="img-responsive"></a>
++                    </div>
++
++                    <div class="collapse navbar-collapse" id="js-navbar-menu">
++                        <ul class="nav navbar-nav navbar-right ep-mobile-menu" id="navbar-nav">
++                            <li><a href="index.html">Home</a></li>
++                            <li class="active"><a href="shop-page.html">Shop</a></li>
++                            <li><a href="single-shop.html">Single Product</a></li>
++                            <li><a href="">About</a></li>
++                            <li class="dropdown xt-drop-nav">
++                                <a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
++                                    Khăn Cotton <span class="caret"></span>
++                                </a>
++                                <ul class="dropdown-menu">
++                                    <li><a href="#">Khăn Cotton màu trắng</a></li>
++                                    <li><a href="#">Khăn Cotton gội đầu màu trắng</a></li>
++                                    <li><a href="#">Khăn Cotton đầu cây lau máy </a></li>
++                                    <li><a href="#">Thảm Cotton</a></li>
++                                </ul>
++                            </li>
++                            <li><a href="">Blog</a></li>
++                            <li><a href="contact-us.html">Contact</a></li>
++                        </ul>
++                    </div>
++                </div>
++            </div>
++        </nav>
++    </div>
++    <!--Mobile Menu-->
++
++
++</header>
++<!--
++|========================
++|  MOBILE MENU
++|========================
++-->
++<div class="menu-spacing">
++    <div class="container">
++        <div class="row">
++            <div class="mobile-menu-area visible-xs visible-sm">
++                <div class="mobile-menu">
++                    <nav id="mobile-menu-active">
++                        <ul class="main">
++                            <li><a class="main-a" href="">Shirt</a></li>
++                            <li><a class="main-a" href="">Pant</a></li>
++                            <li class="active"><a class="main-a" href="#">Bourkha</a>
++                                <ul>
++                                    <li><a href="#">Hijab</a></li>
++                                    <li><a href="#">Scarf</a></li>
++                                    <li><a href="#" class="main-a">Shirt</a>
++                                        <ul>
++                                            <li><a href="#">T-Shirt</a></li>
++                                            <li><a href="#">Trousers</a></li>
++                                            <li><a href="#">Jackets & sweater</a></li>
++                                            <li><a href="#">3 Piece</a></li>
++                                        </ul>
++                                    </li>
++                                </ul>
++                            </li>
++                            <li><a class="main-a" href="">Shawl</a></li>
++                            <li><a class="main-a" href="">Other</a></li>
++                        </ul>
++                    </nav>
++                </div>
++            </div>
++        </div>
++    </div>
++</div>
++
++<!--
++|========================
++|  PRODUCT SUB PAGE
++|========================
++-->
++<div class="xt-product-subpage">
++    <div class="container">
++        <div class="row">
++            <!-- SIDEBAR -->
++
++            <div class="col-md-9">
++                <!--end singlw item info -->
++                <div class="xt-feature-product">
++                    <div class="section-separator">
++
++                        <div class="clearfix"></div>
++                        <div class="xt-each-feature">
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/khan_cotton_1.png}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Sweater</span>
++                                            <span class="name xt-semibold">Red Color</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/khan_cotton_2.png}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="name xt-semibold">Khăn Cotton trắng</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="new-price xt-semibold">30x30</span>
++                                        </div>
++
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/khan_cotton_3.png}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">New Look</span>
++                                            <span class="name xt-semibold">2018 Model Coming Soon</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{resources/assets/images/khan_cotton_4.png}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Lipstick</span>
++                                            <span class="name xt-semibold">Imported From U.S.</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{resources/assets/images/khan_bong_1.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Shirt</span>
++                                            <span class="name xt-semibold">Exclusive Design</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{resources/assets/images/khan_bong_2.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Tops</span>
++                                            <span class="name xt-semibold">Spring Collection</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{resources/assets/images/khan_gym_1.png}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Sweater</span>
++                                            <span class="name xt-semibold">Red Color</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/khan_mollis_1.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">T-Shirt</span>
++                                            <span class="name xt-semibold">2017 Model</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/3.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">New Look</span>
++                                            <span class="name xt-semibold">2018 Model Coming Soon</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/khan_spa_1.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Lipstick</span>
++                                            <span class="name xt-semibold">Imported From U.S.</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/b2.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Shirt</span>
++                                            <span class="name xt-semibold">Exclusive Design</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/b1.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Tops</span>
++                                            <span class="name xt-semibold">Spring Collection</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/2.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Sweater</span>
++                                            <span class="name xt-semibold">Red Color</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/1.jpg}"alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">T-Shirt</span>
++                                            <span class="name xt-semibold">2017 Model</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/3.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">New Look</span>
++                                            <span class="name xt-semibold">2018 Model Coming Soon</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/4.jpg}"alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Lipstick</span>
++                                            <span class="name xt-semibold">Imported From U.S.</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/b2.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Shirt</span>
++                                            <span class="name xt-semibold">Exclusive Design</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/b1.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Tops</span>
++                                            <span class="name xt-semibold">Spring Collection</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/2.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">Sweater</span>
++                                            <span class="name xt-semibold">Red Color</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/1.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">T-Shirt</span>
++                                            <span class="name xt-semibold">2017 Model</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            <div class="col-md-4 col-sm-4">
++                                <div class="xt-feature">
++                                    <div class="product-img">
++                                        <img th:src="@{/resources/assets/images/3.jpg}" alt="" class="img-responsive">
++                                        <span class="product-tag xt-uppercase">sale!</span>
++                                    </div>
++                                    <div class="product-info">
++                                        <div class="product-title">
++                                            <span class="category xt-uppercase">New Look</span>
++                                            <span class="name xt-semibold">2018 Model Coming Soon</span>
++                                        </div>
++                                        <div class="price-tag pull-right">
++                                            <span class="old-price"><del>$280</del></span>
++                                            <span class="new-price xt-semibold">$260</span>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                        </div>
++                        <div class="clearfix"></div>
++                        <div class="col-md-12 xt-bottom-hr">
++                            <hr class="xt-hr">
++                        </div>
++
++                    </div>
++                    <!---->
++                </div>
++            </div>
++        </div>
++    </div>
++</div>
++<!--
++|========================
++|  SUBSCRIBE
++|========================
++-->
++<div class="black-bg">
++    <div class="container">
++        <div class="row">
++            <div class="col-md-6 col-sm-12">
++                <form class="form-inline xt-subscribe-form">
++                    <div class="form-group col-xs-10 xt-subscribe">
++                        <label for="subscribe">Subscribe</label>
++                        <input type="text" class="form-control" id="subscribe" placeholder="Your email address">
++                    </div>
++                    <div class="col-md-2 col-xs-2">
++                        <button type="submit" class="btn btn-fill"><i class="fa flaticon-home"></i></button>
++                    </div>
++                </form>
++            </div>
++            <div class="col-md-6 col-sm-12">
++                <div class="xt-social">
++                    <span>stay conected</span>
++                    <ul>
++                        <li><a href=""><i class="fa fa-facebook"></i></a></li>
++                        <li><a href=""><i class="fa fa-twitter"></i></a></li>
++                        <li><a href=""><i class="fa fa-linkedin"></i></a></li>
++                        <li><a href=""><i class="fa fa-dribbble"></i></a></li>
++                    </ul>
++                </div>
++            </div>
++        </div>
++    </div>
++</div>
++
++<!--
++|========================
++|  FOOTER
++|========================
++-->
++<footer class="xt-footer">
++    <div class="container">
++        <div class="section-separator">
++            <div class="row">
++                <div class="col-md-3 col-sm-3">
++                    <div class="footer-widget footer-contact">
++                        <img th:src="@{/resources/assets/images/flogo.png}" alt="" class="img-responsive">
++                        <ul>
++                            <li><i class="fa fa-mobile-phone"></i><a href="">+(1234) 456 7896</a></li>
++                            <li><i class="fa fa-envelope-o"></i><a href="">info@xootheme.com</a></li>
++                            <li>
++                                <i class="fa fa-location-arrow"></i>
++                                <address>Address: 42/1, dariapara road, New york city, New york. USA</address>
++                            </li>
++                        </ul>
++                    </div>
++                </div>
++                <div class="col-md-3 col-sm-3">
++                    <div class="footer-widget">
++                        <h4>My account</h4>
++                        <ul>
++                            <li><a href=""><i class="fa fa-caret-right"></i>My account</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>about us</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Shopping cart</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Checkout</a></li>
++                        </ul>
++                    </div>
++                </div>
++                <div class="col-md-3 col-sm-3">
++                    <div class="footer-widget">
++                        <h4>Custom Service</h4>
++                        <ul>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Shopping & return</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Seacure Shopping</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>International Shopping </a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Affiliate</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>contact</a></li>
++                        </ul>
++                    </div>
++                </div>
++                <div class="col-md-3 col-sm-3">
++                    <div class="footer-widget">
++                        <h4>Information</h4>
++                        <ul>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Store location</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>About our shop</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Our blog</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Secure Shopping</a></li>
++                            <li><a href=""><i class="fa fa-caret-right"></i>Delivery information</a></li>
++                        </ul>
++                    </div>
++                </div>
++            </div>
++        </div>
++    </div>
++    <div class="clearfix"></div>
++
++</footer>
++
++<!--
++|========================
++|      Script
++|========================
++-->
++
++<!-- jquery -->
++<script th:src="@{/resources/assets/plugins/js/jquery-1.11.3.min.js}"></script>
++<!-- Bootstrap -->
++<script th:src="@{/resources/assets/plugins/js/bootstrap.min.js}"></script>
++<!-- mean menu nav-->
++<script th:src="@{/resources/assets/plugins/js/meanmenu.js}"></script>
++<!-- ajaxchimp -->
++<script th:src="@{/resources/assets/plugins/js/jquery.ajaxchimp.min.js}"></script>
++<!-- wow -->
++<script th:src="@{/resources/assets/plugins/js/wow.min.js}"></script>
++<!-- Owl carousel-->
++<script th:src="@{/resources/assets/plugins/js/owl.carousel.js}"></script>
++<!--flexslider-->
++<script th:src="@{/resources/assets/plugins/js/jquery.flexslider-min.js}"></script>
++<!--dropdownhover-->
++<script th:src="@{/resources/assets/plugins/js/bootstrap-dropdownhover.min.js}"></script>
++<!--jquery-ui.min-->
++<script th:src="@{/resources/assets/plugins/js/jquery-ui.min.js}"></script>
++<!--validator -->
++<script th:src="@{/resources/assets/plugins/js/validator.min.js}"></script>
++<!--smooth scroll-->
++<script th:src="@{/resources/assets/plugins/js/smooth-scroll.js}"></script>
++<!-- Fancybox js-->
++<script th:src="@{/resources/assets/plugins/js/jquery.fancybox.min.js}"></script>
++<!-- selectize -->
++<script th:src="@{/resources/assets/plugins/js/standalone/selectize.js}"></script>
++<!-- init -->
++<script th:src="@{/resources/assets/js/init.js}"></script>
++
+ </body>
++</html>
+\ No newline at end of file
+Index: target/minhhiep_towel-1.0/WEB-INF/spring-mvc-servlet.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n       xmlns:context=\"http://www.springframework.org/schema/context\"\n       xmlns:mybatis=\"http://mybatis.org/schema/mybatis-spring\"\n       xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd\n       http://www.springframework.org/schema/context\n       http://www.springframework.org/schema/context/spring-context.xsd\n       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd\">\n\n    <context:component-scan base-package=\"mhtowel\"/>\n    <context:property-placeholder location=\"/WEB-INF/jdbc.properties\"/>\n    <context:annotation-config/>\n    <mybatis:scan base-package=\"mhtowel.dao\"/>\n\n    <!-- DB/MyBatis -->\n    <bean id=\"dataSource\" class=\"org.apache.commons.dbcp.BasicDataSource\"\n          destroy-method=\"close\">\n        <property name=\"driverClassName\" value=\"${jdbc.driverClassName}\"/>\n        <property name=\"url\" value=\"${jdbc.url}\"/>\n        <property name=\"username\" value=\"${jdbc.username}\"/>\n        <property name=\"password\" value=\"${jdbc.password}\"/>\n\n        <property name=\"connectionInitSqls\" value=\"SET time_zone = '${jdbc.timezone}'\"/>\n        <property name=\"testOnBorrow\" value=\"true\"/>\n        <property name=\"testWhileIdle\" value=\"true\"/>\n        <property name=\"validationQuery\" value=\"SELECT 1\"/>\n        <property name=\"timeBetweenEvictionRunsMillis\" value=\"180000\"/>\n    </bean>\n\n    <!-- MyBatis-Spring(SQLSession) -->\n    <bean id=\"sqlSessionFactory\" class=\"org.mybatis.spring.SqlSessionFactoryBean\">\n        <property name=\"dataSource\" ref=\"dataSource\"/>\n        <property name=\"configLocation\" value=\"classpath:mybatis-config.xml\"/>\n    </bean>\n\n    <bean id=\"templateResolver\"\n          class=\"org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver\">\n        <property name=\"prefix\" value=\"/WEB-INF/templates/\"/>\n        <property name=\"suffix\" value=\".html\"/>\n        <property name=\"templateMode\" value=\"HTML5\"/>\n        <property name=\"cacheable\" value=\"false\"/>\n        <property name=\"characterEncoding\" value=\"UTF-8\"/>\n    </bean>\n    <bean id=\"templateEngine\" class=\"org.thymeleaf.spring4.SpringTemplateEngine\">\n        <property name=\"templateResolver\" ref=\"templateResolver\"/>\n    </bean>\n    <bean class=\"org.thymeleaf.spring4.view.ThymeleafViewResolver\">\n        <property name=\"templateEngine\" ref=\"templateEngine\"/>\n        <property name=\"characterEncoding\" value=\"UTF-8\"/>\n    </bean>\n</beans>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- target/minhhiep_towel-1.0/WEB-INF/spring-mvc-servlet.xml	(revision fca40c3d84f8db0bc29e324a4cd2ba079cfd17f4)
++++ target/minhhiep_towel-1.0/WEB-INF/spring-mvc-servlet.xml	(date 1582791625638)
+@@ -3,14 +3,19 @@
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
++       xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+-       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
++       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
++        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+ 
+     <context:component-scan base-package="mhtowel"/>
+     <context:property-placeholder location="/WEB-INF/jdbc.properties"/>
+     <context:annotation-config/>
++    <mvc:annotation-driven />
++    <mvc:resources mapping="/resources/**" location="/resources/"
++                   cache-period="31556926" />
+     <mybatis:scan base-package="mhtowel.dao"/>
+ 
+     <!-- DB/MyBatis -->
+Index: src/main/webapp/WEB-INF/templates/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html xmlns:th=\"http://www.thymeleaf.org\">\n<!--[if IE 7]> <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]> <html class=\"no-js ie8 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if gt IE 8]><!-->\n<head>\n    <!-- TITLE OF SITE -->\n    <title> Minh Hiep Towel </title>\n\n    <!-- Meta -->\n    <meta charset=\"utf-8\">\n    <meta name=\"description\" content=\"app landing page template\" />\n    <meta name=\"keywords\" content=\"app, landing page, gradient background, image background, video background, template, responsive, bootstrap\" />\n    <meta name=\"developer\" content=\"\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n\n    <!-- FAV AND ICONS   -->\n    <link rel=\"shortcut icon\" th:href=\"@{/resources/assets/images/favicon.ico}\">\n    <link rel=\"shortcut icon\" th:href=\"@{/resources/assets/images/apple-icon.png}\">\n    <link rel=\"shortcut icon\" sizes=\"72x72\" th:href=\"@{/resources/assets/images/apple-icon-72x72.png}\">\n    <link rel=\"shortcut icon\" sizes=\"114x114\" th:href=\"@{/resources/assets/images/apple-icon-114x114.png}\">\n\n    <!-- GOOGLE FONTS -->\n    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7cPlayfair+Display:400,400i,700,900\" rel=\"stylesheet\">\n\n    <!-- FONT ICONS -->\n    <link rel=\"stylesheet\" type=\"text/css\"  th:href=\"@{/resources/assets/icons/font-awesome-4.7.0/css/font-awesome.css}\" />\n\n    <!-- Custom Icon Font -->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/fonts/flaticon.css}\">\n    <!-- Bootstrap-->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/bootstrap.min.css}\">\n    <!-- Fancybox-->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/jquery.fancybox.min.css}\">\n    <!-- Animation -->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/animate.css}\">\n    <!-- owl -->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/owl.css}\">\n    <!--flexslider-->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/flexslider.min.css}\">\n    <!-- selectize -->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/selectize.css}\">\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/selectize.bootstrap3.css}\">\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/jquery-ui.min.css}\">\n    <!--dropdown -->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/bootstrap-dropdownhover.min.css}\">\n    <!-- mobile nav-->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/plugins/css/meanmenu.css}\">\n\n    <!-- COUSTOM CSS link  -->\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/css/style.css}\">\n    <link rel=\"stylesheet\" th:href=\"@{/resources/assets/css/responsive.css}\">\n\n\n    <!--[if lt IE 9]><script src=\"js/plagin-js/html5shiv.js\"></script>-->\n    <!--<script src=\"js/plagin-js/respond.min.js\"></script>-->\n    <!--[endif]-->\n\n</head>\n<body>\n<!--\n|========================\n|  HEADER\n|========================\n-->\n<header id=\"xt-home\" class=\"xt-header\">\n    <div class=\"header-top\">\n        <div class=\"container\">\n\n            <div class=\"user-nav pull-right col-md-6 col-sm-6 col-xs-12\">\n                <ul>\n                    <li><a href=\"\">Hot line: </a></li>\n                    <li><a href=\"\">0912345678</a></li>\n                </ul>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"main-navigation\">\n        <nav class=\"navbar navbar-fixed-top nav-scroll\">\n            <div class=\"container\">\n                <div class=\"row\">\n                    <div class=\"navbar-header\">\n                        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                            <span aria-hidden=\"true\" class=\"icon\"></span>\n                        </button>\n                        <a class=\"navbar-brand\" href=\"index.html\"><img th:src=\"@{/resources/assets/images/flogo.png}\" alt=\"\" class=\"img-responsive\"></a>\n                    </div>\n\n                    <div class=\"collapse navbar-collapse\" id=\"js-navbar-menu\">\n                        <ul class=\"nav navbar-nav navbar-right ep-mobile-menu\" id=\"navbar-nav\">\n                            <li><a href=\"index.html\">Home</a></li>\n                            <li class=\"active\"><a href=\"shop-page.html\">Shop</a></li>\n                            <li><a href=\"single-shop.html\">Single Product</a></li>\n                            <li><a href=\"\">About</a></li>\n                            <li class=\"dropdown xt-drop-nav\">\n                                <a href=\"\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" data-hover=\"dropdown\">\n                                    Khăn Cotton <span class=\"caret\"></span>\n                                </a>\n                                <ul class=\"dropdown-menu\">\n                                    <li><a href=\"#\">Khăn Cotton màu trắng</a></li>\n                                    <li><a href=\"#\">Khăn Cotton gội đầu màu trắng</a></li>\n                                    <li><a href=\"#\">Khăn Cotton đầu cây lau máy </a></li>\n                                    <li><a href=\"#\">Thảm Cotton</a></li>\n                                </ul>\n                            </li>\n                            <li><a href=\"\">Blog</a></li>\n                            <li><a href=\"contact-us.html\">Contact</a></li>\n                        </ul>\n                    </div>\n                </div>\n            </div>\n        </nav>\n    </div>\n    <!--Mobile Menu-->\n\n\n</header>\n<!--\n|========================\n|  MOBILE MENU\n|========================\n-->\n<div class=\"menu-spacing\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"mobile-menu-area visible-xs visible-sm\">\n                <div class=\"mobile-menu\">\n                    <nav id=\"mobile-menu-active\">\n                        <ul class=\"main\">\n                            <li><a class=\"main-a\" href=\"\">Shirt</a></li>\n                            <li><a class=\"main-a\" href=\"\">Pant</a></li>\n                            <li class=\"active\"><a class=\"main-a\" href=\"#\">Bourkha</a>\n                                <ul>\n                                    <li><a href=\"#\">Hijab</a></li>\n                                    <li><a href=\"#\">Scarf</a></li>\n                                    <li><a href=\"#\" class=\"main-a\">Shirt</a>\n                                        <ul>\n                                            <li><a href=\"#\">T-Shirt</a></li>\n                                            <li><a href=\"#\">Trousers</a></li>\n                                            <li><a href=\"#\">Jackets & sweater</a></li>\n                                            <li><a href=\"#\">3 Piece</a></li>\n                                        </ul>\n                                    </li>\n                                </ul>\n                            </li>\n                            <li><a class=\"main-a\" href=\"\">Shawl</a></li>\n                            <li><a class=\"main-a\" href=\"\">Other</a></li>\n                        </ul>\n                    </nav>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<!--\n|========================\n|  PRODUCT SUB PAGE\n|========================\n-->\n<div class=\"xt-product-subpage\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <!-- SIDEBAR -->\n\n            <div class=\"col-md-9\">\n                <!--end singlw item info -->\n                <div class=\"xt-feature-product\">\n                    <div class=\"section-separator\">\n\n                        <div class=\"clearfix\"></div>\n                        <div class=\"xt-each-feature\">\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/2.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Sweater</span>\n                                            <span class=\"name xt-semibold\">Red Color</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Sweater</span>\n                                                <span class=\"name xt-semibold\">Red Color</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/1.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">T-Shirt</span>\n                                            <span class=\"name xt-semibold\">2017 Model</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">T-Shirt</span>\n                                                <span class=\"name xt-semibold\">2017 Model</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/3.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">New Look</span>\n                                            <span class=\"name xt-semibold\">2018 Model Coming Soon</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">New Look</span>\n                                                <span class=\"name xt-semibold\">2018 Model Coming Soon</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{resources/assets/images/4.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Lipstick</span>\n                                            <span class=\"name xt-semibold\">Imported From U.S.</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Lipstick</span>\n                                                <span class=\"name xt-semibold\">Imported From U.S.</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{resources/assets/images/b2.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Shirt</span>\n                                            <span class=\"name xt-semibold\">Exclusive Design</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Shirt</span>\n                                                <span class=\"name xt-semibold\">Exclusive Design</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{resources/assets/images/b1.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Tops</span>\n                                            <span class=\"name xt-semibold\">Spring Collection</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Tops</span>\n                                                <span class=\"name xt-semibold\">Spring Collection</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{resources/assets/images/2.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Sweater</span>\n                                            <span class=\"name xt-semibold\">Red Color</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Sweater</span>\n                                                <span class=\"name xt-semibold\">Red Color</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/1.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">T-Shirt</span>\n                                            <span class=\"name xt-semibold\">2017 Model</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">T-Shirt</span>\n                                                <span class=\"name xt-semibold\">2017 Model</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/3.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">New Look</span>\n                                            <span class=\"name xt-semibold\">2018 Model Coming Soon</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">New Look</span>\n                                                <span class=\"name xt-semibold\">2018 Model Coming Soon</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/4.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Lipstick</span>\n                                            <span class=\"name xt-semibold\">Imported From U.S.</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Lipstick</span>\n                                                <span class=\"name xt-semibold\">Imported From U.S.</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/b2.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Shirt</span>\n                                            <span class=\"name xt-semibold\">Exclusive Design</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Shirt</span>\n                                                <span class=\"name xt-semibold\">Exclusive Design</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/b1.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Tops</span>\n                                            <span class=\"name xt-semibold\">Spring Collection</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Tops</span>\n                                                <span class=\"name xt-semibold\">Spring Collection</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/2.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Sweater</span>\n                                            <span class=\"name xt-semibold\">Red Color</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Sweater</span>\n                                                <span class=\"name xt-semibold\">Red Color</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/1.jpg}\"alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">T-Shirt</span>\n                                            <span class=\"name xt-semibold\">2017 Model</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">T-Shirt</span>\n                                                <span class=\"name xt-semibold\">2017 Model</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/3.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">New Look</span>\n                                            <span class=\"name xt-semibold\">2018 Model Coming Soon</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">New Look</span>\n                                                <span class=\"name xt-semibold\">2018 Model Coming Soon</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/4.jpg}\"alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Lipstick</span>\n                                            <span class=\"name xt-semibold\">Imported From U.S.</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Lipstick</span>\n                                                <span class=\"name xt-semibold\">Imported From U.S.</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/b2.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Shirt</span>\n                                            <span class=\"name xt-semibold\">Exclusive Design</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Shirt</span>\n                                                <span class=\"name xt-semibold\">Exclusive Design</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/b1.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Tops</span>\n                                            <span class=\"name xt-semibold\">Spring Collection</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Tops</span>\n                                                <span class=\"name xt-semibold\">Spring Collection</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/2.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">Sweater</span>\n                                            <span class=\"name xt-semibold\">Red Color</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">Sweater</span>\n                                                <span class=\"name xt-semibold\">Red Color</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/1.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">T-Shirt</span>\n                                            <span class=\"name xt-semibold\">2017 Model</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">T-Shirt</span>\n                                                <span class=\"name xt-semibold\">2017 Model</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 col-sm-4\">\n                                <div class=\"xt-feature\">\n                                    <div class=\"product-img\">\n                                        <img th:src=\"@{/resources/assets/images/3.jpg}\" alt=\"\" class=\"img-responsive\">\n                                        <span class=\"product-tag xt-uppercase\">sale!</span>\n                                    </div>\n                                    <div class=\"product-info\">\n                                        <div class=\"product-title\">\n                                            <span class=\"category xt-uppercase\">New Look</span>\n                                            <span class=\"name xt-semibold\">2018 Model Coming Soon</span>\n                                        </div>\n                                        <div class=\"price-tag pull-right\">\n                                            <span class=\"old-price\"><del>$280</del></span>\n                                            <span class=\"new-price xt-semibold\">$260</span>\n                                        </div>\n                                        <div class=\"xt-featured-caption\">\n                                            <div class=\"product-title\">\n                                                <span class=\"category xt-uppercase\">New Look</span>\n                                                <span class=\"name xt-semibold\">2018 Model Coming Soon</span>\n                                            </div>\n                                            <div class=\"price-tag pull-right\">\n                                                <span class=\"old-price\"><del>$280</del></span>\n                                                <span class=\"new-price xt-semibold\">$260</span>\n                                            </div>\n                                            <div class=\"add-cart\">\n                                                <a href=\"\" class=\"btn btn-fill\">Add to cart</a>\n                                                <ul class=\"reaction\">\n                                                    <li><a href=\"\"><i class=\"fa fa-search\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-heart-o\"></i></a></li>\n                                                    <li><a href=\"\"><i class=\"fa fa-bar-chart-o\"></i></a></li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"clearfix\"></div>\n                        <div class=\"col-md-12 xt-bottom-hr\">\n                            <hr class=\"xt-hr\">\n                        </div>\n\n                    </div>\n                    <!---->\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n<!--\n|========================\n|  SUBSCRIBE\n|========================\n-->\n<div class=\"black-bg\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-md-6 col-sm-12\">\n                <form class=\"form-inline xt-subscribe-form\">\n                    <div class=\"form-group col-xs-10 xt-subscribe\">\n                        <label for=\"subscribe\">Subscribe</label>\n                        <input type=\"text\" class=\"form-control\" id=\"subscribe\" placeholder=\"Your email address\">\n                    </div>\n                    <div class=\"col-md-2 col-xs-2\">\n                        <button type=\"submit\" class=\"btn btn-fill\"><i class=\"fa flaticon-home\"></i></button>\n                    </div>\n                </form>\n            </div>\n            <div class=\"col-md-6 col-sm-12\">\n                <div class=\"xt-social\">\n                    <span>stay conected</span>\n                    <ul>\n                        <li><a href=\"\"><i class=\"fa fa-facebook\"></i></a></li>\n                        <li><a href=\"\"><i class=\"fa fa-twitter\"></i></a></li>\n                        <li><a href=\"\"><i class=\"fa fa-linkedin\"></i></a></li>\n                        <li><a href=\"\"><i class=\"fa fa-dribbble\"></i></a></li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<!--\n|========================\n|  FOOTER\n|========================\n-->\n<footer class=\"xt-footer\">\n    <div class=\"container\">\n        <div class=\"section-separator\">\n            <div class=\"row\">\n                <div class=\"col-md-3 col-sm-3\">\n                    <div class=\"footer-widget footer-contact\">\n                        <img th:src=\"@{/resources/assets/images/flogo.png}\" alt=\"\" class=\"img-responsive\">\n                        <ul>\n                            <li><i class=\"fa fa-mobile-phone\"></i><a href=\"\">+(1234) 456 7896</a></li>\n                            <li><i class=\"fa fa-envelope-o\"></i><a href=\"\">info@xootheme.com</a></li>\n                            <li>\n                                <i class=\"fa fa-location-arrow\"></i>\n                                <address>Address: 42/1, dariapara road, New york city, New york. USA</address>\n                            </li>\n                        </ul>\n                    </div>\n                </div>\n                <div class=\"col-md-3 col-sm-3\">\n                    <div class=\"footer-widget\">\n                        <h4>My account</h4>\n                        <ul>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>My account</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>about us</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Shopping cart</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Checkout</a></li>\n                        </ul>\n                    </div>\n                </div>\n                <div class=\"col-md-3 col-sm-3\">\n                    <div class=\"footer-widget\">\n                        <h4>Custom Service</h4>\n                        <ul>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Shopping & return</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Seacure Shopping</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>International Shopping </a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Affiliate</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>contact</a></li>\n                        </ul>\n                    </div>\n                </div>\n                <div class=\"col-md-3 col-sm-3\">\n                    <div class=\"footer-widget\">\n                        <h4>Information</h4>\n                        <ul>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Store location</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>About our shop</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Our blog</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Secure Shopping</a></li>\n                            <li><a href=\"\"><i class=\"fa fa-caret-right\"></i>Delivery information</a></li>\n                        </ul>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"clearfix\"></div>\n\n</footer>\n\n<!--\n|========================\n|      Script\n|========================\n-->\n\n<!-- jquery -->\n<script th:src=\"@{/resources/assets/plugins/js/jquery-1.11.3.min.js}\"></script>\n<!-- Bootstrap -->\n<script th:src=\"@{/resources/assets/plugins/js/bootstrap.min.js}\"></script>\n<!-- mean menu nav-->\n<script th:src=\"@{/resources/assets/plugins/js/meanmenu.js}\"></script>\n<!-- ajaxchimp -->\n<script th:src=\"@{/resources/assets/plugins/js/jquery.ajaxchimp.min.js}\"></script>\n<!-- wow -->\n<script th:src=\"@{/resources/assets/plugins/js/wow.min.js}\"></script>\n<!-- Owl carousel-->\n<script th:src=\"@{/resources/assets/plugins/js/owl.carousel.js}\"></script>\n<!--flexslider-->\n<script th:src=\"@{/resources/assets/plugins/js/jquery.flexslider-min.js}\"></script>\n<!--dropdownhover-->\n<script th:src=\"@{/resources/assets/plugins/js/bootstrap-dropdownhover.min.js}\"></script>\n<!--jquery-ui.min-->\n<script th:src=\"@{/resources/assets/plugins/js/jquery-ui.min.js}\"></script>\n<!--validator -->\n<script th:src=\"@{/resources/assets/plugins/js/validator.min.js}\"></script>\n<!--smooth scroll-->\n<script th:src=\"@{/resources/assets/plugins/js/smooth-scroll.js}\"></script>\n<!-- Fancybox js-->\n<script th:src=\"@{/resources/assets/plugins/js/jquery.fancybox.min.js}\"></script>\n<!-- selectize -->\n<script th:src=\"@{/resources/assets/plugins/js/standalone/selectize.js}\"></script>\n<!-- init -->\n<script th:src=\"@{/resources/assets/js/init.js}\"></script>\n\n</body>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/templates/index.html	(revision fca40c3d84f8db0bc29e324a4cd2ba079cfd17f4)
++++ src/main/webapp/WEB-INF/templates/index.html	(date 1582792685258)
+@@ -174,7 +174,7 @@
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{/resources/assets/images/2.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{/resources/assets/images/khan_cotton_1.png}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+@@ -185,24 +185,6 @@
+                                         <div class="price-tag pull-right">
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+-                                        </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Sweater</span>
+-                                                <span class="name xt-semibold">Red Color</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+                                         </div>
+                                     </div>
+                                 </div>
+@@ -210,43 +192,24 @@
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{/resources/assets/images/1.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{/resources/assets/images/khan_cotton_2.png}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+                                         <div class="product-title">
+-                                            <span class="category xt-uppercase">T-Shirt</span>
+-                                            <span class="name xt-semibold">2017 Model</span>
++                                            <span class="name xt-semibold">Khăn Cotton trắng</span>
+                                         </div>
+                                         <div class="price-tag pull-right">
+-                                            <span class="old-price"><del>$280</del></span>
+-                                            <span class="new-price xt-semibold">$260</span>
+-                                        </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">T-Shirt</span>
+-                                                <span class="name xt-semibold">2017 Model</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
++                                            <span class="new-price xt-semibold">30x30</span>
+                                         </div>
++
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{/resources/assets/images/3.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{/resources/assets/images/khan_cotton_3.png}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+@@ -258,31 +221,13 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">New Look</span>
+-                                                <span class="name xt-semibold">2018 Model Coming Soon</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{resources/assets/images/4.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{resources/assets/images/khan_cotton_4.png}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+@@ -294,31 +239,13 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Lipstick</span>
+-                                                <span class="name xt-semibold">Imported From U.S.</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{resources/assets/images/b2.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{resources/assets/images/khan_bong_1.jpg}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+@@ -329,24 +256,6 @@
+                                         <div class="price-tag pull-right">
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+-                                        </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Shirt</span>
+-                                                <span class="name xt-semibold">Exclusive Design</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+                                         </div>
+                                     </div>
+                                 </div>
+@@ -354,7 +263,7 @@
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{resources/assets/images/b1.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{resources/assets/images/khan_bong_2.jpg}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+@@ -366,31 +275,13 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Tops</span>
+-                                                <span class="name xt-semibold">Spring Collection</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{resources/assets/images/2.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{resources/assets/images/khan_gym_1.png}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+@@ -401,24 +292,6 @@
+                                         <div class="price-tag pull-right">
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+-                                        </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Sweater</span>
+-                                                <span class="name xt-semibold">Red Color</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+                                         </div>
+                                     </div>
+                                 </div>
+@@ -426,7 +299,7 @@
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{/resources/assets/images/1.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{/resources/assets/images/khan_mollis_1.jpg}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+@@ -438,24 +311,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">T-Shirt</span>
+-                                                <span class="name xt-semibold">2017 Model</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -474,31 +329,13 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">New Look</span>
+-                                                <span class="name xt-semibold">2018 Model Coming Soon</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-4 col-sm-4">
+                                 <div class="xt-feature">
+                                     <div class="product-img">
+-                                        <img th:src="@{/resources/assets/images/4.jpg}" alt="" class="img-responsive">
++                                        <img th:src="@{/resources/assets/images/khan_spa_1.jpg}" alt="" class="img-responsive">
+                                         <span class="product-tag xt-uppercase">sale!</span>
+                                     </div>
+                                     <div class="product-info">
+@@ -510,24 +347,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Lipstick</span>
+-                                                <span class="name xt-semibold">Imported From U.S.</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -546,24 +365,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Shirt</span>
+-                                                <span class="name xt-semibold">Exclusive Design</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -582,24 +383,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Tops</span>
+-                                                <span class="name xt-semibold">Spring Collection</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -618,24 +401,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Sweater</span>
+-                                                <span class="name xt-semibold">Red Color</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -653,24 +418,6 @@
+                                         <div class="price-tag pull-right">
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+-                                        </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">T-Shirt</span>
+-                                                <span class="name xt-semibold">2017 Model</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+                                         </div>
+                                     </div>
+                                 </div>
+@@ -690,24 +437,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">New Look</span>
+-                                                <span class="name xt-semibold">2018 Model Coming Soon</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -726,24 +455,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Lipstick</span>
+-                                                <span class="name xt-semibold">Imported From U.S.</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -762,24 +473,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Shirt</span>
+-                                                <span class="name xt-semibold">Exclusive Design</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -798,24 +491,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Tops</span>
+-                                                <span class="name xt-semibold">Spring Collection</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -833,24 +508,6 @@
+                                         <div class="price-tag pull-right">
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+-                                        </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">Sweater</span>
+-                                                <span class="name xt-semibold">Red Color</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+                                         </div>
+                                     </div>
+                                 </div>
+@@ -870,24 +527,6 @@
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+                                         </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">T-Shirt</span>
+-                                                <span class="name xt-semibold">2017 Model</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+-                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+@@ -905,24 +544,6 @@
+                                         <div class="price-tag pull-right">
+                                             <span class="old-price"><del>$280</del></span>
+                                             <span class="new-price xt-semibold">$260</span>
+-                                        </div>
+-                                        <div class="xt-featured-caption">
+-                                            <div class="product-title">
+-                                                <span class="category xt-uppercase">New Look</span>
+-                                                <span class="name xt-semibold">2018 Model Coming Soon</span>
+-                                            </div>
+-                                            <div class="price-tag pull-right">
+-                                                <span class="old-price"><del>$280</del></span>
+-                                                <span class="new-price xt-semibold">$260</span>
+-                                            </div>
+-                                            <div class="add-cart">
+-                                                <a href="" class="btn btn-fill">Add to cart</a>
+-                                                <ul class="reaction">
+-                                                    <li><a href=""><i class="fa fa-search"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+-                                                    <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+-                                                </ul>
+-                                            </div>
+                                         </div>
+                                     </div>
+                                 </div>
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>minhhiep_towel</groupId>\n    <artifactId>minhhiep_towel</artifactId>\n    <version>1.0</version>\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-compiler-plugin</artifactId>\n                <configuration>\n                    <source>6</source>\n                    <target>6</target>\n                </configuration>\n            </plugin>\n        </plugins>\n    </build>\n    <packaging>war</packaging>\n    <properties>\n        <spring.version>4.1.5.RELEASE</spring.version>\n        <mybatis.version>3.2.8</mybatis.version>\n        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>\n    </properties>\n    <dependencies>\n        <dependency>\n            <groupId>mysql</groupId>\n            <artifactId>mysql-connector-java</artifactId>\n            <version>5.1.6</version>\n        </dependency>\n        <dependency>\n            <groupId>commons-dbcp</groupId>\n            <artifactId>commons-dbcp</artifactId>\n            <version>1.4</version>\n        </dependency>\n        <dependency>\n            <groupId>log4j</groupId>\n            <artifactId>log4j</artifactId>\n            <version>1.2.13</version>\n        </dependency>\n        <!-- Spring -->\n        <dependency>\n            <groupId>org.springframework</groupId>\n            <artifactId>spring-core</artifactId>\n            <version>${spring.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework</groupId>\n            <artifactId>spring-web</artifactId>\n            <version>${spring.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework</groupId>\n            <artifactId>spring-webmvc</artifactId>\n            <version>${spring.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework</groupId>\n            <artifactId>spring-tx</artifactId>\n            <version>${spring.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework</groupId>\n            <artifactId>spring-orm</artifactId>\n            <version>${spring.version}</version>\n        </dependency>\n\n        <!-- MyBatis -->\n        <dependency>\n            <groupId>org.mybatis</groupId>\n            <artifactId>mybatis</artifactId>\n            <version>${mybatis.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>org.mybatis</groupId>\n            <artifactId>mybatis-spring</artifactId>\n            <version>1.2.2</version>\n        </dependency>\n        <dependency>\n            <groupId>mysql</groupId>\n            <artifactId>mysql-connector-java</artifactId>\n            <version>5.1.34</version>\n        </dependency>\n        <!-- Others -->\n        <dependency>\n            <groupId>javax.servlet</groupId>\n            <artifactId>javax.servlet-api</artifactId>\n            <version>3.1.0</version>\n        </dependency>\n        <!-- Thymeleaf -->\n        <dependency>\n            <groupId>org.thymeleaf</groupId>\n            <artifactId>thymeleaf</artifactId>\n            <version>${thymeleaf.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>org.thymeleaf</groupId>\n            <artifactId>thymeleaf-spring4</artifactId>\n            <version>${thymeleaf.version}</version>\n        </dependency>\n    </dependencies>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(revision fca40c3d84f8db0bc29e324a4cd2ba079cfd17f4)
++++ pom.xml	(date 1582794558010)
+@@ -17,6 +17,26 @@
+                     <target>6</target>
+                 </configuration>
+             </plugin>
++            <plugin>
++                <groupId>org.apache.maven.plugins</groupId>
++                <artifactId>maven-dependency-plugin</artifactId>
++                <executions>
++                    <execution>
++                        <phase>package</phase>
++                        <goals><goal>copy</goal></goals>
++                        <configuration>
++                            <artifactItems>
++                                <artifactItem>
++                                    <groupId>com.heroku</groupId>
++                                    <artifactId>webapp-runner</artifactId>
++                                    <version>9.0.30.0</version>
++                                    <destFileName>webapp-runner.jar</destFileName>
++                                </artifactItem>
++                            </artifactItems>
++                        </configuration>
++                    </execution>
++                </executions>
++            </plugin>
+         </plugins>
+     </build>
+     <packaging>war</packaging>
