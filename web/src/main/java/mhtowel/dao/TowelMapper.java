@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface TowelMapper {
     List<Towel> getListTowel();
+    List<Towel> getVehicleListTowel(@Param("shortName") String shortName);
 }

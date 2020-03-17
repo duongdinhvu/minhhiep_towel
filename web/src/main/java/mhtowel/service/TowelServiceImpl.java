@@ -20,6 +20,12 @@ public class TowelServiceImpl implements TowelService {
     }
 
     @Override
+    public List<Towel> getVehicleListService(String shortName) {
+        shortName = shortName == null ? "%kh-xe%" : shortName;
+        return towelMapper.getVehicleListTowel(shortName);
+    }
+
+    @Override
     public Towel getTowel() {
         return null;
     }

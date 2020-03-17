@@ -5,6 +5,8 @@ public class Towel {
     private int idType;
     private String towelName;
     private String description;
+    private String image;
+    private String shortName;
 
     public int getId() {
         return id;
@@ -36,5 +38,21 @@ public class Towel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 }

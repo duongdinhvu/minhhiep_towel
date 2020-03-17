@@ -7,4 +7,9 @@
         select *
         from towel
     </select>
+    <select id="getVehicleListTowel" resultType="towel">
+        select *
+        from towel
+        where shortName like #{shortName}
+    </select>
 </mapper>

@@ -16,9 +16,6 @@
 
     <!-- FAV AND ICONS   -->
     <link rel="shortcut icon" th:href="@{/resources/assets/images/favicon.ico}">
-    <link rel="shortcut icon" th:href="@{/resources/assets/images/apple-icon.png}">
-    <link rel="shortcut icon" sizes="72x72" th:href="@{/resources/assets/images/apple-icon-72x72.png}">
-    <link rel="shortcut icon" sizes="114x114" th:href="@{/resources/assets/images/apple-icon-114x114.png}">
 
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7cPlayfair+Display:400,400i,700,900" rel="stylesheet">
@@ -50,12 +47,35 @@
     <!-- COUSTOM CSS link  -->
     <link rel="stylesheet" th:href="@{/resources/assets/css/style.css}">
     <link rel="stylesheet" th:href="@{/resources/assets/css/responsive.css}">
-
+    <link href='https://fonts.googleapis.com/css?family=Asset' rel='stylesheet'>
 
     <!--[if lt IE 9]><script src="js/plagin-js/html5shiv.js"></script>-->
     <!--<script src="js/plagin-js/respond.min.js"></script>-->
     <!--[endif]-->
-
+    <style>
+    .blink {
+            animation: blinker 0.6s linear infinite;
+            color: red;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: sans-serif;
+            }
+            @keyframes blinker {
+            50% { opacity: 0; }
+            }
+            .blink-one {
+            animation: blinker-one 1s linear infinite;
+            }
+            @keyframes blinker-one {
+            0% { opacity: 0; }
+            }
+            .blink-two {
+            animation: blinker-two 1.8s linear infinite;
+            }
+            @keyframes blinker-two {
+            100% { opacity: 0; }
+            }
+    </style>
 </head>
 <body>
 <!--
@@ -69,8 +89,8 @@
 
             <div class="user-nav pull-right col-md-6 col-sm-6 col-xs-12">
                 <ul>
-                    <li><a href="">Hot line: </a></li>
-                    <li><a href="">0912345678</a></li>
+                    <blink class="blink"><li style="font-weight: bold;font-size: 16px;">Hot line: </li></blink>
+                    <li style="font-family:  'Asset';font-size: 22px;color: deepskyblue;">0912345678</li>
                 </ul>
             </div>
         </div>
@@ -84,28 +104,31 @@
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span aria-hidden="true" class="icon"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html"><img th:src="@{/resources/assets/images/flogo.png}" alt="" class="img-responsive"></a>
+                        <a class="navbar-brand" href="index.html"><img th:src="@{/resources/assets/images/mh_logo.png}" alt="" class="img-responsive"></a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="js-navbar-menu">
                         <ul class="nav navbar-nav navbar-right ep-mobile-menu" id="navbar-nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li class="active"><a href="shop-page.html">Shop</a></li>
-                            <li><a href="single-shop.html">Single Product</a></li>
-                            <li><a href="">About</a></li>
                             <li class="dropdown xt-drop-nav">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                                    Khăn Cotton <span class="caret"></span>
+                                <a  th:href="@{/index.html/danang}" >
+                                    Khăn lau xe, lau kính
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Khăn Cotton màu trắng</a></li>
-                                    <li><a href="#">Khăn Cotton gội đầu màu trắng</a></li>
-                                    <li><a href="#">Khăn Cotton đầu cây lau máy </a></li>
-                                    <li><a href="#">Thảm Cotton</a></li>
-                                </ul>
                             </li>
-                            <li><a href="">Blog</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li class="dropdown xt-drop-nav">
+                                <a  th:href="@{/index.html/cotton}" >
+                                    Khăn Cotton
+                                </a>
+                            </li>
+                            <li class="dropdown xt-drop-nav">
+                                <a  th:href="@{/index.html/ks-spa}" >
+                                    Khăn khách sạn, spa
+                                </a>
+                            </li>
+                            <li class="dropdown xt-drop-nav">
+                                <a  th:href="@{/index.html/multi}" >
+                                    Khăn vắt sổ, vệ sinh, thảm chân
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -163,387 +186,25 @@
     <div class="container">
         <div class="row">
             <!-- SIDEBAR -->
-
-            <div class="col-md-9">
                 <!--end singlw item info -->
                 <div class="xt-feature-product">
                     <div class="section-separator">
 
                         <div class="clearfix"></div>
-                        <div class="xt-each-feature">
-                            <div class="col-md-4 col-sm-4">
+                        <div class="xt-each-feature" th:if="${listTowel != null}">
+                            <div class="col-md-4 col-sm-4" th:each="towel: ${listTowel}">
                                 <div class="xt-feature">
                                     <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/khan_cotton_1.png}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
+                                        <img th:src="@{${towel.image}}" alt="" class="img-responsive">
                                     </div>
                                     <div class="product-info">
                                         <div class="product-title">
-                                            <span class="category xt-uppercase">Sweater</span>
-                                            <span class="name xt-semibold">Red Color</span>
+                                            <span class="category xt-uppercase"><span th:text="${towel.towelName}"></span></span>
+                                            <span class="name xt-semibold"><span th:text="${towel.description}"></span></span>
                                         </div>
                                         <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/khan_cotton_2.png}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="name xt-semibold">Khăn Cotton trắng</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="new-price xt-semibold">30x30</span>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/khan_cotton_3.png}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">New Look</span>
-                                            <span class="name xt-semibold">2018 Model Coming Soon</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{resources/assets/images/khan_cotton_4.png}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Lipstick</span>
-                                            <span class="name xt-semibold">Imported From U.S.</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{resources/assets/images/khan_bong_1.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Shirt</span>
-                                            <span class="name xt-semibold">Exclusive Design</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{resources/assets/images/khan_bong_2.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Tops</span>
-                                            <span class="name xt-semibold">Spring Collection</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{resources/assets/images/khan_gym_1.png}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Sweater</span>
-                                            <span class="name xt-semibold">Red Color</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/khan_mollis_1.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">T-Shirt</span>
-                                            <span class="name xt-semibold">2017 Model</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/3.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">New Look</span>
-                                            <span class="name xt-semibold">2018 Model Coming Soon</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/khan_spa_1.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Lipstick</span>
-                                            <span class="name xt-semibold">Imported From U.S.</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/b2.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Shirt</span>
-                                            <span class="name xt-semibold">Exclusive Design</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/b1.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Tops</span>
-                                            <span class="name xt-semibold">Spring Collection</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/2.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Sweater</span>
-                                            <span class="name xt-semibold">Red Color</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/1.jpg}"alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">T-Shirt</span>
-                                            <span class="name xt-semibold">2017 Model</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/3.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">New Look</span>
-                                            <span class="name xt-semibold">2018 Model Coming Soon</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/4.jpg}"alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Lipstick</span>
-                                            <span class="name xt-semibold">Imported From U.S.</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/b2.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Shirt</span>
-                                            <span class="name xt-semibold">Exclusive Design</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/b1.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Tops</span>
-                                            <span class="name xt-semibold">Spring Collection</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/2.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">Sweater</span>
-                                            <span class="name xt-semibold">Red Color</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/1.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">T-Shirt</span>
-                                            <span class="name xt-semibold">2017 Model</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="xt-feature">
-                                    <div class="product-img">
-                                        <img th:src="@{/resources/assets/images/3.jpg}" alt="" class="img-responsive">
-                                        <span class="product-tag xt-uppercase">sale!</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <span class="category xt-uppercase">New Look</span>
-                                            <span class="name xt-semibold">2018 Model Coming Soon</span>
-                                        </div>
-                                        <div class="price-tag pull-right">
-                                            <span class="old-price"><del>$280</del></span>
-                                            <span class="new-price xt-semibold">$260</span>
+                                            <span class="old-price"><del></del></span>
+                                            <span class="new-price xt-semibold"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -557,7 +218,6 @@
                     </div>
                     <!---->
                 </div>
-            </div>
         </div>
     </div>
 </div>
